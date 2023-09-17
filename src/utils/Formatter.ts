@@ -36,6 +36,3 @@ export const Formatter = {
     return result.toFixed(decimals);
   },
 };
-//  `R$ ${currentExchangeData?.exchangeRate?.toFixed(
-//     2,
-//   )}`;
