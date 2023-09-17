@@ -62,4 +62,8 @@ export default createGlobalStyle`
     letter-spacing: 0px;
     color: #3F3F3F;
   }
+
+  .MuiSvgIcon-root {
+    color: #07B0FB;
+  }
 `;
