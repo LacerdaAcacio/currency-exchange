@@ -2,9 +2,9 @@ import { Grid } from "@mui/material";
 import { DailyCard, LowerHigherField } from "./styles";
 import { Formatter } from "../../utils/Formatter";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { DailyExchangeCards } from "../../types/ParamsData";
+import { DailyExchangeCardsParams } from "../../types/ParamsData";
 
-const Cards = ({ dailyExchangeData, comparison }: DailyExchangeCards) => {
+const Cards = ({ dailyExchangeData, comparison }: DailyExchangeCardsParams) => {
   const formattedInfo = (
     text: string,
     value: string | number,
