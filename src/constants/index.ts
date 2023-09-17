@@ -8,4 +8,5 @@ export const LABELS: LabelsData = {
   FOOTER: "Copyright 2022 - Action Labs",
   CURRENT_TITLE: "Exchange Rate now",
   MAIN_TITLE: "BRL Exchange Rate",
+  INVALID_VALUE: "Insira um código de moeda válido como JPY, USD, EUR, etc.",
 };
