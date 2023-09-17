@@ -1,14 +1,17 @@
-import { ReactComponent as Logo } from '../src/assets/images/svg/logo.svg';
+import CurrentExchange from "./components/CurrentExchange";
+import Footer from "./components/Footer";
+import Form from "./components/Form";
+import Header from "./components/Header";
 
-function App() {
-
+const App = () => {
   return (
     <>
-      <div style={{color: 'black', fontSize: '30px', borderRadius: '20px'}}>
-        <Logo />
-      </div>
+      <Header />
+      <Form />
+      {/* <CurrentExchange /> */}
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
