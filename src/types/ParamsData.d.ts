@@ -1,8 +1,18 @@
+import { CurrentExchangeData } from "./CurrentExchangeData";
 import { DailyExchangeData } from "./DailyExchangeData";
+import { FormData } from "./FormData";
 
-export type ExchangeParams = Record<string, unknown>;
+export type ExchangeParams = Record<FormData>;
 
-export interface DailyExchangeCards {
+export interface DailyExchangeCardsParams {
   dailyExchangeData: DailyExchangeData;
   comparison: number | string;
+}
+
+export interface DailyExchangeParams {
+  formData: FormData;
+}
+
+export interface CurrentExchangeCardsParams {
+  currentExchangeData: CurrentExchangeData;
 }

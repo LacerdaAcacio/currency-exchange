@@ -4,4 +4,5 @@ export interface LabelsData {
   FOOTER: string;
   CURRENT_TITLE: string;
   MAIN_TITLE: string;
+  INVALID_VALUE: string;
 }
