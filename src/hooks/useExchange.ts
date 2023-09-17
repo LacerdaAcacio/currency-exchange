@@ -1,3 +1,4 @@
+import { FormData } from "./../types/FormData.d";
 import { useState } from "react";
 // import { SubmitHandler } from "react-hook-form";
 // import { FormData } from "../types/FormData";
@@ -30,10 +31,12 @@ import { FormData } from "../types/FormData";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useFetchExchange } from "./useFetchExchange";
-import { ExchangeParams } from "../types/ParamsData";
+import { ExchangeParams, UseExchangeParams } from "../types/ParamsData";
+import { v4 as uuidv4 } from "uuid";
 
 export const useExchange = () => {
   const [hasExchangeData, setHasExchangeData] = useState(false);
+  const [dailyExchangeExpanded, setDailyExchangeExpanded] = useState(false);
   const { getExchange } = useFetchExchange();
 
   // const objectToQueryString = (
@@ -122,6 +125,7 @@ export const useExchange = () => {
   // }
 
   interface DateItem {
+    close: number;
     date: string; // ou poderia ser 'Date' se os dados já fossem em formato de data.
     // outros campos aqui se necessário
   }
@@ -148,6 +152,25 @@ export const useExchange = () => {
     });
   };
 
+  const inputProps = {
+    maxLength: 3,
+    pattern: "^[A-Z]{3}$",
+    onInput: (e) => {
+      e.target.value = e.target.value.toUpperCase().slice(0, 3);
+    },
+  };
+
+  const generateKey = uuidv4();
+  // const lastThirtyDays =
+  //   hasExchangeData && dailyExchangeExpanded ? getLastThirtyDays(exchangeData?.data) : [];
+
+  const handleExpand = (formData: FormData) => {
+    setDailyExchangeExpanded(!dailyExchangeExpanded);
+    if (!dailyExchangeExpanded) {
+      onSubmit(formData, true);
+    }
+  };
+
   // function getLastThirtyDays(data: any[]) {
   //   const currentDate = new Date();
   //   currentDate.setHours(0, 0, 0, 0); // Zerar horas, minutos, segundos e milissegundos
@@ -165,8 +188,13 @@ export const useExchange = () => {
 
   return {
     onSubmit,
+    exchangeLoading: fetchExchangeRateMutation.isLoading,
     exchangeData: fetchExchangeRateMutation.data,
     hasExchangeData,
     getLastThirtyDays,
+    inputProps,
+    generateKey,
+    dailyExchangeExpanded,
+    handleExpand,
   };
 };
