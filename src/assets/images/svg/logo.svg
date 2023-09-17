@@ -1,4 +1,5 @@
-<svg width="160" height="44" viewBox="0 0 160 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="300" height="82.5" viewBox="0 0 160 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<a xlink:href="https://actionlabs.com.br/" target="_blank">
 <g clip-path="url(#clip0_401_7383)">
 <path d="M17.5862 6.77151V0L11.7241 3.38081L17.5862 6.77151Z" fill="#5DC4E9"/>
 <path d="M17.5862 40.6192V33.8477L11.7241 37.2285L17.5862 40.6192Z" fill="#009BC0"/>
@@ -36,4 +37,5 @@
 <rect width="159.748" height="44" fill="white"/>
 </clipPath>
 </defs>
+</a>
 </svg>
