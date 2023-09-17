@@ -2,7 +2,7 @@ import { LowerHigherField } from "../styles";
 import { Formatter } from "../../../utils/Formatter";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
-const FormattedInfo: React.FC<{
+const FormattedCardContent: React.FC<{
   text: string;
   value: string | number;
   isComparison?: boolean;
@@ -23,3 +23,5 @@ const FormattedInfo: React.FC<{
     </div>
   );
 };
+
+export default FormattedCardContent;
