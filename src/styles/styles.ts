@@ -31,7 +31,13 @@ export const ExchangeContainer = styled.div`
   width: 330px;
 `;
 
+export const StyledNormalH3 = styled.h3`
+  font-weight: normal;
+  color: #333333;
+`;
+
 export const CurrentExchangeCard = styled.div`
+  margin: 20px 0px;
   display: flex;
   align-items: center;
   background: #e6f7ff;
