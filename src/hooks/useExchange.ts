@@ -30,7 +30,7 @@ import { FormData } from "../types/FormData";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useFetchExchange } from "./useFetchExchange";
-import { ExchangeParams } from "../types/ExchangeParams";
+import { ExchangeParams } from "../types/ParamsData";
 
 export const useExchange = () => {
   const [hasExchangeData, setHasExchangeData] = useState(false);

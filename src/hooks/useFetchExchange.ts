@@ -4,7 +4,7 @@ import { axios } from "axios";
 import { useQuery } from "react-query";
 // import axios from "axios";
 import { EXCHANGE_URL } from "../constants/routes";
-import { ExchangeParams } from "../types/ExchangeParams";
+import { ExchangeParams } from "../types/ParamsData";
 
 export const useFetchExchange = () => {
   // type ExchangeParams = Record<string, unknown>;

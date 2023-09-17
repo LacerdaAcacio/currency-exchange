@@ -3,12 +3,6 @@ import Button from "@mui/material/Button";
 import styled, { css } from "styled-components";
 import { ReactComponent as Logo } from "../../src/assets/images/svg/logo.svg";
 
-// export const HeaderContainer = styled.div`
-//     justify-content: center;
-//     flex-direction: column;
-//     display: flex;
-// `;
-
 const backgroundBlueSharedStyles = css`
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -23,8 +17,6 @@ const MarginSharedStyles = css`
   && {
     width: 330px;
     margin: 25px 0px;
-    /* height: 2px;
-    background: #d9d9d9; */
   }
 `;
 
@@ -47,13 +39,11 @@ export const CurrentExchangeCard = styled.div`
   top: 430px;
   left: 15px;
   opacity: 0.1px;
-  //styleName: Dashboard/Big number;
   font-family: Roboto;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
   letter-spacing: 0px;
-  /* text-justify: center; */
 `;
 
 export const FormattedLogo = styled(Logo)`
@@ -82,7 +72,6 @@ export const CurrentExchangeDivider = styled(Divider)`
 
 export const DailyExchangeDivider = styled(Divider)`
   && {
-    /* margin: 40px; */
     width: 70%;
   }
 `;
@@ -101,51 +90,6 @@ export const ExchangeButton = styled(Button)`
     ${backgroundBlueSharedStyles}
     width: 330px;
     height: 48px;
-    /* top: 30px; */
     border-radius: 100px;
   }
 `;
-
-// export const FooterContainer = styled.div`
-//     width: 100%;
-//     height: 30px;
-//     background: #07B0FB;
-//     font-family: Roboto, Arial, Helvetica, sans-serif;
-//     font-size: 16px;
-//     font-weight: 500;
-//     line-height: 24px;
-//     letter-spacing: 0em;
-//     text-align: center;
-// `
-
-// export const TitleText = styled.h1`
-//     width: 100%;
-//     font-family: Roboto, Arial, Helvetica, sans-serif;
-//     font-size: 24px;
-//     font-weight: 700;
-//     letter-spacing: 0px;
-//     text-align: center;
-//     text-justify: center;
-//     color: #07B0FB;
-//     width: 239px;
-//     height: 30px;
-//     top: 110px;
-//     left: 65px;
-// `;
-
-// export const ExchangeButton = styled(Button)`
-//    && { width: 330px;
-//     height: 48px;
-//     top: 30px;
-//     border-radius: 100px;
-//     /* border-radius: 100px; */
-//     background: #07B0FB;
-//     //styleName: Button/Large;
-//     font-family: Roboto, Arial, Helvetica, sans-serif;
-//     font-size: 16px;
-//     font-weight: 500;
-//     line-height: 24px;
-//     letter-spacing: 0em;
-//     text-align: center;
-//     }
-// `;
