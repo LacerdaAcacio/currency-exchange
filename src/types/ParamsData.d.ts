@@ -16,3 +16,9 @@ export interface DailyExchangeParams {
 export interface CurrentExchangeCardsParams {
   currentExchangeData: CurrentExchangeData;
 }
+
+export interface FormattedCardContent {
+  text: string;
+  value: string | number;
+  isComparison?: boolean;
+}
