@@ -40,23 +40,23 @@ const Form = () => {
 
   return (
     <FlexContainer>
-      {exchangeLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Grid item xs={12}>
-            <input hidden value={API_KEY} {...register("apiKey")} />
-            <FormattedTextField
-              id="from_symbol"
-              label={LABELS.INPUT}
-              variant="filled"
-              error={hasError}
-              helperText={helperText}
-              inputProps={currencyCodeInputProps}
-              {...formRegisterSettings}
-            />
-            <input hidden value="BRL" {...register("to_symbol")} />
-          </Grid>
+      <>
+        <Grid item xs={12}>
+          <input hidden value={API_KEY} {...register("apiKey")} />
+          <FormattedTextField
+            id="from_symbol"
+            label={LABELS.INPUT}
+            variant="filled"
+            error={hasError}
+            helperText={helperText}
+            inputProps={currencyCodeInputProps}
+            {...formRegisterSettings}
+          />
+          <input hidden value="BRL" {...register("to_symbol")} />
+        </Grid>
+        {exchangeLoading ? (
+          <Loading />
+        ) : (
           <Grid item xs={12}>
             <ExchangeButton
               key="exchange_button"
@@ -67,17 +67,17 @@ const Form = () => {
               {LABELS.BUTTON}
             </ExchangeButton>
           </Grid>
-          {hasExchangeData && (
-            <>
-              <CurrentExchange
-                key="current_exchange"
-                currentExchangeData={exchangeData}
-              />
-              <DailyExchange key={generateKey} formData={getValues()} />
-            </>
-          )}
-        </>
-      )}
+        )}
+        {hasExchangeData && (
+          <>
+            <CurrentExchange
+              key="current_exchange"
+              currentExchangeData={exchangeData}
+            />
+            <DailyExchange key={generateKey} formData={getValues()} />
+          </>
+        )}
+      </>
     </FlexContainer>
   );
 };
