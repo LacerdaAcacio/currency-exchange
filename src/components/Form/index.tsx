@@ -9,9 +9,9 @@ import { useForm } from "react-hook-form";
 import { useExchange } from "../../hooks/useExchange";
 import CurrentExchange from "../CurrentExchange";
 import DailyExchange from "../DailyExchange";
-import { v4 as uuidv4 } from "uuid";
 import { ExchangeParams } from "../../types/ParamsData";
-import { Backdrop, CircularProgress } from "@mui/material";
+import { useFetchExchange } from "../../hooks/useFetchExchange";
+import Loading from "../Loading";
 
 const Form = () => {
   const {
@@ -20,17 +20,13 @@ const Form = () => {
     getValues,
     formState: { errors },
   } = useForm();
-  const {
-    onSubmit,
-    exchangeData,
-    hasExchangeData,
-    inputProps,
-    exchangeLoading,
-  } = useExchange();
+  const { currencyCodeInputProps, generateKey } = useExchange();
+
+  const { onSubmit, exchangeData, exchangeLoading, hasExchangeData } =
+    useFetchExchange();
 
   const hasError = Boolean(errors.from_symbol);
   const helperText = (errors?.from_symbol?.message || "") as string;
-  const generateKey = uuidv4();
 
   const formRegisterSettings = {
     ...register("from_symbol", {
@@ -45,9 +41,7 @@ const Form = () => {
   return (
     <FlexContainer>
       {exchangeLoading ? (
-        <Backdrop open={true}>
-          <CircularProgress color="primary" />
-        </Backdrop>
+        <Loading />
       ) : (
         <>
           <Grid item xs={12}>
@@ -58,7 +52,7 @@ const Form = () => {
               variant="filled"
               error={hasError}
               helperText={helperText}
-              inputProps={inputProps}
+              inputProps={currencyCodeInputProps}
               {...formRegisterSettings}
             />
             <input hidden value="BRL" {...register("to_symbol")} />
@@ -73,15 +67,15 @@ const Form = () => {
               {LABELS.BUTTON}
             </ExchangeButton>
           </Grid>
-          {/* {hasExchangeData && ( */}
-          <>
-            <CurrentExchange
-              key="current_exchange"
-              currentExchangeData={exchangeData}
-            />
-            <DailyExchange key={generateKey} formData={getValues()} />
-          </>
-          {/* )} */}
+          {hasExchangeData && (
+            <>
+              <CurrentExchange
+                key="current_exchange"
+                currentExchangeData={exchangeData}
+              />
+              <DailyExchange key={generateKey} formData={getValues()} />
+            </>
+          )}
         </>
       )}
     </FlexContainer>
