@@ -1,36 +1,32 @@
 import { FlexContainer } from "../../styles/styles";
 import { useExchange } from "../../hooks/useExchange";
-import { useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from "@mui/material";
+import { AccordionDetails, AccordionSummary } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Cards from "../Cards";
-import { v4 as uuidv4 } from "uuid";
 import { Formatter } from "../../utils/Formatter";
 import { DailyExchangeParams } from "../../types/ParamsData";
 import { DailyExchangeData } from "../../types/DailyExchangeData";
+import { useFetchExchange } from "../../hooks/useFetchExchange";
+import { LABELS } from "../../constants";
+import Loading from "../Loading";
+import { StyledAccordion } from "./styles";
 
 const DailyExchange = ({ formData }: DailyExchangeParams) => {
-  // const [expanded, setExpanded] = useState(false);
   const {
-    // onSubmit,
-    exchangeData,
-    hasExchangeData,
+    dailyExchangeExpanded,
     getLastThirtyDays,
-    exchangeLoading,
     generateKey,
     handleExpand,
-    dailyExchangeExpanded,
   } = useExchange();
+
+  const { exchangeData, exchangeLoading, hasExchangeData } = useFetchExchange();
+
+  const dailyTitle = LABELS.DAILY_TITLE.toUpperCase();
 
   const lastThirtyDays =
     hasExchangeData && dailyExchangeExpanded
-      ? getLastThirtyDays(exchangeData?.data)
+      ? (getLastThirtyDays(exchangeData?.data) as DailyExchangeData[])
       : [];
 
   const compareCloseToPrevious = (data: DailyExchangeData, index: number) => {
@@ -62,30 +58,33 @@ const DailyExchange = ({ formData }: DailyExchangeParams) => {
 
   return (
     <>
-      <Accordion
-        aria-busy={exchangeLoading}
-        expanded={dailyExchangeExpanded && hasExchangeData}
-        onChange={() => handleExpand(formData)}
-        style={{
-          border: "0px",
-          borderBottom: "2px solid #07B0FB",
-          width: "98%",
-          marginBottom: "50px",
-        }}
-      >
-        <AccordionSummary
-          expandIcon={dailyExchangeExpanded ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+      {exchangeLoading ? (
+        <Loading />
+      ) : (
+        <StyledAccordion
+          aria-busy={exchangeLoading}
+          expanded={dailyExchangeExpanded}
+          // expanded={dailyExchangeExpanded && hasExchangeData}
+          onChange={() => handleExpand(formData)}
         >
-          <Typography>LAST 30 DAYS</Typography>
-        </AccordionSummary>
-        <AccordionDetails
-          style={{ background: "#F4F4F4", height: "250px", overflowY: "auto" }}
-        >
-          {hasExchangeData && lastThirtyDays?.map(mapFunction)}
-        </AccordionDetails>
-      </Accordion>
+          <AccordionSummary
+            expandIcon={dailyExchangeExpanded ? <RemoveIcon /> : <AddIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <p>{dailyTitle}</p>
+          </AccordionSummary>
+          <AccordionDetails
+            style={{
+              background: "#F4F4F4",
+              height: "250px",
+              overflowY: "auto",
+            }}
+          >
+            {hasExchangeData && lastThirtyDays?.map(mapFunction)}
+          </AccordionDetails>
+        </StyledAccordion>
+      )}
     </>
   );
 };
