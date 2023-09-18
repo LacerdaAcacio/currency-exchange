@@ -1,6 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+  :root {
+    --primary-color: #07B0FB;
+    --text-dark: #262626;
+    --text-light: #3F3F3F;
+    --font-family-main: Roboto, Arial, Helvetica, sans-serif;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -8,62 +15,52 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   
-  h1 {
-    width: 100%;
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    font-size: 24px;
-    font-weight: 700;
+  h1, h2, h3, span, p {
+    font-family: var(--font-family-main);
     letter-spacing: 0px;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 1.5rem; 
+    font-weight: 700;
     text-align: center;
-    color: #07B0FB;
+    color: var(--primary-color);
   }
 
   h2 {
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 1.125rem; 
     font-weight: 600;
     line-height: 28px;
-    letter-spacing: 0px;
     text-align: left;
-    color: #262626;
-    width: 100%px;
-    top: 370px;
-    left: 15px;
+    color: var(--text-dark);
   }
 
   h3 {
-    color: #07B0FB;
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    color: var(--primary-color);
+    font-size: 0.875rem; 
     font-weight: 600;
     line-height: 22px;
-    letter-spacing: 0px;
-    width: 100%;
-    height: 22px;
   }
 
   span {
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 0.6875rem;
     font-weight: 500;
     line-height: 14px;
-    letter-spacing: 0px;
     text-align: left;
-    color: #3F3F3F;
+    color: var(--text-light);
   }
 
   p {
     display: flex;
     align-items: center;
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 1rem; 
     font-weight: 600;
     line-height: 24px;
-    letter-spacing: 0px;
-    color: #3F3F3F;
+    color: var(--text-light);
   }
 
   .MuiSvgIcon-root {
-    color: #07B0FB;
+    color: var(--primary-color);
   }
 `;
