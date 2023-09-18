@@ -5,4 +5,5 @@ export interface LabelsData {
   CURRENT_TITLE: string;
   MAIN_TITLE: string;
   INVALID_VALUE: string;
+  DAILY_TITLE: string;
 }
