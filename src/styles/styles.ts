@@ -5,9 +5,9 @@ import { ReactComponent as Logo } from "../../src/assets/images/svg/logo.svg";
 
 const backgroundBlueSharedStyles = css`
   font-family: Roboto, Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5;
   letter-spacing: 0em;
   text-align: center;
   background: #07b0fb;
@@ -15,8 +15,16 @@ const backgroundBlueSharedStyles = css`
 
 const MarginSharedStyles = css`
   && {
-    width: 330px;
-    margin: 25px 0px;
+    width: 20.625rem;
+    margin: 1.5625rem 0;
+  }
+`;
+
+const DividerSharedStyles = css`
+  && {
+    width: 98%;
+    height: 2px;
+    background: #d9d9d9;
   }
 `;
 
@@ -27,57 +35,39 @@ export const FlexContainer = styled.div`
   flex-direction: column;
 `;
 
-export const ExchangeContainer = styled.div`
-  width: 330px;
-`;
-
-export const StyledNormalH3 = styled.h3`
-  font-weight: normal;
-  color: #333333;
-`;
-
-export const CurrentExchangeCard = styled.div`
-  margin: 20px 0px;
-  display: flex;
-  align-items: center;
-  background: #e6f7ff;
-  height: 72px;
-  top: 430px;
-  left: 15px;
-  opacity: 0.1px;
-  font-family: Roboto;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 40px;
-  letter-spacing: 0px;
-`;
-
 export const FormattedLogo = styled(Logo)`
   ${MarginSharedStyles}
 `;
 
 export const FormattedTextField = styled(TextField)`
   ${MarginSharedStyles}
+
+  && label.Mui-focused {
+    color: #07b0fb;
+  }
+
+  && .MuiFilledInput-underline:after {
+    border-bottom: 2px solid #07b0fb;
+  }
 `;
 
 export const HeaderDivider = styled(Divider)`
   && {
-    width: 98%;
-    margin-bottom: 30px;
-    height: 2px;
-    background: #d9d9d9;
+    ${DividerSharedStyles}
+    margin-bottom: 1.875rem;
   }
 `;
 
 export const CurrentExchangeDivider = styled(Divider)`
   && {
-    margin: 40px;
-    width: 98%;
+    ${DividerSharedStyles}
+    margin: 2.5rem 0;
   }
 `;
 
 export const DailyExchangeDivider = styled(Divider)`
   && {
+    ${DividerSharedStyles}
     width: 70%;
   }
 `;
@@ -94,8 +84,8 @@ export const FooterContainer = styled.div`
 export const ExchangeButton = styled(Button)`
   && {
     ${backgroundBlueSharedStyles}
-    width: 330px;
-    height: 48px;
+    width: 20.625rem;
+    height: 3rem;
     border-radius: 100px;
   }
 `;
