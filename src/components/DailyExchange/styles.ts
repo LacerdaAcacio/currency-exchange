@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Accordion } from "@mui/material";
+import { Accordion, AccordionDetails } from "@mui/material";
 import styled, { css } from "styled-components";
 
 const IconSharedStyles = css`
@@ -9,11 +9,11 @@ const IconSharedStyles = css`
   }
 `;
 
-export const FormattedRemoveIcon = styled(RemoveIcon)`
+export const StyledRemoveIcon = styled(RemoveIcon)`
   ${IconSharedStyles}
 `;
 
-export const FormattedAddIcon = styled(AddIcon)`
+export const StyledAddIcon = styled(AddIcon)`
   ${IconSharedStyles}
 `;
 
@@ -30,5 +30,13 @@ export const StyledAccordion = styled(Accordion)`
     &::after {
       content: none;
     }
+  }
+`;
+
+export const StyledAccordionDetails = styled(AccordionDetails)`
+  && {
+    background-color: "#F4F4F4";
+    height: 15.625rem;
+    overflow-y: auto;
   }
 `;

@@ -1,4 +1,5 @@
 export interface CurrentExchangeData {
+  data: any;
   exchangeRate: number;
   fromSymbol: string;
   toSymbol: string;
