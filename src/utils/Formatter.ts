@@ -1,14 +1,12 @@
 export const Formatter = {
   money: (value: number | string, decimals: number = 2) => {
-    console.log(value);
     return `R$ ${Number(value).toFixed(decimals)}`;
   },
 
   date: (inputDate: string) => {
     const date = new Date(inputDate);
-
     const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Os meses vão de 0 (janeiro) a 11 (dezembro)
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
 
     const hours = String(date.getHours()).padStart(2, "0");
@@ -34,5 +32,14 @@ export const Formatter = {
       ? (multiplyingNumberType * multiplierNumberType) / divisorNumberType
       : 0;
     return result.toFixed(decimals);
+  },
+
+  objectToQueryString: (obj: Record<string, unknown>) => {
+    return (
+      "?" +
+      Object.keys(obj)
+        .map((key) => `${key}=${obj[key]}`)
+        .join("&")
+    );
   },
 };
