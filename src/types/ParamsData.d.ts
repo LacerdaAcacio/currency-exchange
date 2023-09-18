@@ -14,11 +14,15 @@ export interface DailyExchangeParams {
 }
 
 export interface CurrentExchangeCardsParams {
-  currentExchangeData: CurrentExchangeData;
+  currentExchangeData?: CurrentExchangeData;
 }
 
 export interface FormattedCardContentParams {
   text: string;
   value: string | number;
   isComparison?: boolean;
+}
+
+export interface LoadingParams {
+  isLoading: boolean;
 }
