@@ -3,4 +3,6 @@ export interface CurrentExchangeData {
   fromSymbol: string;
   toSymbol: string;
   lastUpdatedAt: string;
+  success: boolean;
+  rateLimitExceeded: boolean;
 }
