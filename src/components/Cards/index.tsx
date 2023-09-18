@@ -31,6 +31,33 @@ const Cards = ({ dailyExchangeData, comparison }: DailyExchangeCardsParams) => {
   //     </FlexAlignedDiv>
   //   );
   // };
+  // console.log(dailyExchangeData);
+  const formattedInfo = (
+    text: string,
+    value: string | number,
+    isComparison?: boolean,
+  ) => {
+    const formattedValue = Formatter.money(value, 4);
+    const isHigher = Boolean(Number(value) >= 0);
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          // justifyContent: "flex-start",
+        }}
+      >
+        <span style={{ marginRight: "12px" }}>{text.toLocaleUpperCase()}:</span>
+        {isComparison ? (
+          <LowerHigherField isHigher={isHigher}>
+            {value}% {isHigher ? <ExpandLess /> : <ExpandMore />}
+          </LowerHigherField>
+        ) : (
+          <p>{formattedValue}</p>
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -40,47 +67,47 @@ const Cards = ({ dailyExchangeData, comparison }: DailyExchangeCardsParams) => {
             <h3>{Formatter.date(dailyExchangeData?.date)}</h3>
           </Grid>
           <Grid item xs={6}>
-            {/* <h2>{formattedInfo("Open", dailyExchangeData?.open)}</h2> */}
-            <h2>
+            <h2>{formattedInfo("Open", dailyExchangeData?.open)}</h2>
+            {/* <h2>
               <FormattedCardContent
                 text="Open"
                 value={dailyExchangeData?.open}
               />
-            </h2>
+            </h2> */}
           </Grid>
           <Grid item xs={6}>
-            {/* <h2>{formattedInfo("High", dailyExchangeData?.high)}</h2> */}
-            <h2>
+            <h2>{formattedInfo("High", dailyExchangeData?.high)}</h2>
+            {/* <h2>
               <FormattedCardContent
                 text="High"
                 value={dailyExchangeData?.high}
               />
-            </h2>
+            </h2> */}
           </Grid>
           <Grid item xs={6}>
-            {/* <h2>{formattedInfo("Close", dailyExchangeData?.close)}</h2> */}
-            <h2>
+            <h2>{formattedInfo("Close", dailyExchangeData?.close)}</h2>
+            {/* <h2>
               <FormattedCardContent
                 text="Close"
                 value={dailyExchangeData?.close}
               />
-            </h2>
+            </h2> */}
           </Grid>
           <Grid item xs={6}>
-            {/* <h2>{formattedInfo("Low", dailyExchangeData?.low)}</h2> */}
-            <h2>
+            <h2>{formattedInfo("Low", dailyExchangeData?.low)}</h2>
+            {/* <h2>
               <FormattedCardContent text="Low" value={dailyExchangeData?.low} />
-            </h2>
+            </h2> */}
           </Grid>
           <Grid item xs={12}>
-            {/* <h2>{formattedInfo("Close Diff (%)", comparison, true)}</h2> */}
-            <h2>
+            <h2>{formattedInfo("Close Diff (%)", comparison, true)}</h2>
+            {/* <h2>
               <FormattedCardContent
                 text="Close Diff (%)"
                 value={comparison}
                 isComparison
               />
-            </h2>
+            </h2> */}
           </Grid>
         </Grid>
       </DailyCard>

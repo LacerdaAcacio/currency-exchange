@@ -18,7 +18,7 @@ export default createGlobalStyle`
   h1, h2, h3, span, p {
     font-family: var(--font-family-main);
     letter-spacing: 0px;
-    width: 100%;
+    /* width: 100%; */
   }
 
   h1 {
@@ -60,7 +60,7 @@ export default createGlobalStyle`
     color: var(--text-light);
   }
 
-  .MuiSvgIcon-root {
+  /* .MuiSvgIcon-root {
     color: var(--primary-color);
-  }
+  } */
 `;

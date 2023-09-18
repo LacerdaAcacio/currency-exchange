@@ -17,7 +17,7 @@ export interface CurrentExchangeCardsParams {
   currentExchangeData: CurrentExchangeData;
 }
 
-export interface FormattedCardContent {
+export interface FormattedCardContentParams {
   text: string;
   value: string | number;
   isComparison?: boolean;
