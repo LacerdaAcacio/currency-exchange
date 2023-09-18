@@ -1,60 +1,50 @@
-import { axios } from "axios";
-// import { SubmitHandler } from "react-hook-form";
-// import { FormData } from "../types/FormData";
-import { useQuery } from "react-query";
-// import axios from "axios";
-import { EXCHANGE_URL } from "../constants/routes";
+import { Formatter } from "./../utils/Formatter";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { EXCHANGE_URL } from "../constants";
 import { ExchangeParams } from "../types/ParamsData";
+import { useState } from "react";
+import { CurrentExchangeData } from "../types/CurrentExchangeData";
+import { DailyExchange } from "../types/DailyExchangeData";
 
 export const useFetchExchange = () => {
-  // type ExchangeParams = Record<string, unknown>;
-  // const query = useQuery("exchange", () => {
-  //   return axios(`${EXCHANGE_URL}/${data.currency}`).then(
-  //     (res) => res.data,
-  //   );
-  // });
-  // const getExchange = async (params: any, isDaily?: boolean) => {
-  // console.log(
-  //   `${EXCHANGE_URL}${
-  //     isDaily ? "currentExchangeRate" : "dailyExchangeRate"
-  //   }${params}`,
-  // );
+  const [hasExchangeData, setHasExchangeData] = useState(false);
 
-  //   return `${EXCHANGE_URL}${
-  //     isDaily ? "dailyExchangeRate" : "currentExchangeRate"
-  //   }${params}`;
-  // };
+  const getExchangeResponse = (response: {
+    data: CurrentExchangeData | DailyExchange;
+  }) => {
+    const responseData = response?.data;
+    const hasRequestSucceeded = responseData?.success ?? false;
 
-  // const getIssuer = async (params?: { params: unknown }) => {
-  //     const response = await sendRequest(() => registerApi.issuers.get({ ...params }));
-  //     return response || { data: [] as any[], total: 0, last_page: 0 };
-  //   };
+    setHasExchangeData(hasRequestSucceeded);
 
-  //     const query = useQuery("exchange", () => {
-  //       return axios.get(api).then((res: any) => res.data);
-  //     });
-  //     return query;
-  //   };
-
-  //   const query = useQuery("exchange", () => {
-  //     return axios.get(getExchange()).then((res) => res.data);
-  //   });
-  const objectToQueryString = (obj: Record<string, unknown>) => {
-    return (
-      "?" +
-      Object.keys(obj)
-        .map((key) => `${key}=${obj[key]}`)
-        .join("&")
-    );
+    return responseData;
   };
+
+  const fetchExchangeRateMutation = useMutation(
+    async ({ data, isDaily }: { data: ExchangeParams; isDaily: boolean }) => {
+      const exchangeURL = await getExchange(data, isDaily);
+      return axios.get(exchangeURL).then(getExchangeResponse);
+    },
+  );
 
   const getExchange = async (
     params: ExchangeParams,
     isDaily: boolean = false,
   ) => {
     const endpoint = isDaily ? "dailyExchangeRate" : "currentExchangeRate";
-    return `${EXCHANGE_URL}${endpoint}${objectToQueryString(params)}`;
+    return `${EXCHANGE_URL}${endpoint}${Formatter.objectToQueryString(params)}`;
   };
 
-  return { getExchange };
+  const onSubmit = (data: ExchangeParams, isDaily: boolean = false) => {
+    fetchExchangeRateMutation.mutate({ data, isDaily });
+  };
+
+  return {
+    getExchange,
+    onSubmit,
+    exchangeLoading: fetchExchangeRateMutation.isLoading,
+    exchangeData: fetchExchangeRateMutation.data,
+    hasExchangeData,
+  };
 };
