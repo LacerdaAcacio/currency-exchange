@@ -7,7 +7,7 @@ export interface DailyExchangeData {
 }
 
 export interface DailyExchange {
-  success: string;
+  success: boolean;
   from: string;
   to: string;
   lastUpdatedAt: string;
