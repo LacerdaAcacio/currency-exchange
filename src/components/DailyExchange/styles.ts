@@ -1,5 +1,21 @@
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { Accordion } from "@mui/material";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const IconSharedStyles = css`
+  && {
+    color: "#07B0FB";
+  }
+`;
+
+export const FormattedRemoveIcon = styled(RemoveIcon)`
+  ${IconSharedStyles}
+`;
+
+export const FormattedAddIcon = styled(AddIcon)`
+  ${IconSharedStyles}
+`;
 
 export const StyledAccordion = styled(Accordion)`
   && {
