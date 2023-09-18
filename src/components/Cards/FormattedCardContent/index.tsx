@@ -1,18 +1,19 @@
-import { LowerHigherField } from "../styles";
+import { FlexAlignedDiv, LowerHigherField, RightMarginedSpan } from "../styles";
 import { Formatter } from "../../../utils/Formatter";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { FormattedCardContent } from "../../../types/ParamsData";
 
-const FormattedCardContent: React.FC<{
-  text: string;
-  value: string | number;
-  isComparison?: boolean;
-}> = ({ text, value, isComparison = false }) => {
+const FormattedCardContent: React.FC<FormattedCardContent> = ({
+  text,
+  value,
+  isComparison = false,
+}: FormattedCardContent) => {
   const formattedValue = Formatter.money(value, 4);
   const isHigher = Boolean(Number(value) >= 0);
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <span style={{ marginRight: "12px" }}>{text.toLocaleUpperCase()}:</span>
+    <FlexAlignedDiv>
+      <RightMarginedSpan>{text.toLocaleUpperCase()}:</RightMarginedSpan>
       {isComparison ? (
         <LowerHigherField isHigher={isHigher}>
           {value}% {isHigher ? <ExpandLess /> : <ExpandMore />}
@@ -20,7 +21,7 @@ const FormattedCardContent: React.FC<{
       ) : (
         <p>{formattedValue}</p>
       )}
-    </div>
+    </FlexAlignedDiv>
   );
 };
 
