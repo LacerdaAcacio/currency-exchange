@@ -1,13 +1,13 @@
 import Grid from "@mui/material/Grid";
 import { LABELS } from "../../constants";
+import { CurrentExchangeDivider } from "../../styles/styles";
+import { Formatter } from "../../utils/Formatter";
+import { CurrentExchangeCardsParams } from "../../types/ParamsData";
 import {
   CurrentExchangeCard,
   ExchangeContainer,
-  CurrentExchangeDivider,
   StyledNormalH3,
-} from "../../styles/styles";
-import { Formatter } from "../../utils/Formatter";
-import { CurrentExchangeCardsParams } from "../../types/ParamsData";
+} from "./styles";
 
 const CurrentExchange = ({
   currentExchangeData,
