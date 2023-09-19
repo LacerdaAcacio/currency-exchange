@@ -1,16 +1,9 @@
-import { DailyExchangeData } from "./../types/DailyExchangeData.d";
-import React, { useState } from "react";
-import { FormData } from "../types/FormData";
-import { useFetchExchange } from "./useFetchExchange";
-import { v4 as uuidv4 } from "uuid";
+/* eslint-disable no-param-reassign */
+import { DailyExchangeData } from "../types/DailyExchangeData.d";
 import { MILLISECONDS_IN_A_DAY } from "../constants";
+import Formatter from "../utils/Formatter";
 
 export const useExchange = () => {
-  const [dailyExchangeExpanded, setDailyExchangeExpanded] = useState(false);
-  const { onSubmit } = useFetchExchange();
-
-  const generateKey = uuidv4();
-
   const currencyCodeInputProps = {
     maxLength: 3,
     pattern: "^[A-Z]{3}$",
@@ -19,41 +12,49 @@ export const useExchange = () => {
     },
   };
 
+  const toMidnight = (date: Date): Date => {
+    const adjustedDate = new Date(date);
+    adjustedDate.setHours(0, 0, 0, 0);
+    return adjustedDate;
+  };
+
   const getDifferenceInDays = (firstDate: Date, secondDate: Date): number => {
     return (firstDate.getTime() - secondDate.getTime()) / MILLISECONDS_IN_A_DAY;
   };
 
-  const toMidnight = (date: Date): Date => {
-    const newDate = new Date(date);
-    newDate.setHours(0, 0, 0, 0);
-    return newDate;
-  };
-
-  const getLastThirtyDays = (dailyExchangeData: DailyExchangeData[]) => {
+  const filterLastThirtyDays = (dailyExchangeData: DailyExchangeData[]) => {
     const currentDate = toMidnight(new Date());
-    const hasDailyExchangeData = Boolean(dailyExchangeData.length > 0);
 
-    if (hasDailyExchangeData)
-      return dailyExchangeData.filter((data: DailyExchangeData) => {
-        const itemDate = toMidnight(new Date(data.date));
-        const differenceInDays = getDifferenceInDays(currentDate, itemDate);
-        return differenceInDays <= 30;
-      });
-    return [];
+    return dailyExchangeData.filter((data: DailyExchangeData) => {
+      const dataDate = toMidnight(new Date(data.date));
+      const differenceInDays = getDifferenceInDays(currentDate, dataDate);
+      return differenceInDays <= 30;
+    });
   };
 
-  const handleExpand = (formData: FormData) => {
-    setDailyExchangeExpanded(!dailyExchangeExpanded);
-    if (!dailyExchangeExpanded) {
-      onSubmit(formData, true);
-    }
+  const compareCloseToPrevious = (
+    data: DailyExchangeData,
+    index: number,
+    lastThirtyDays: DailyExchangeData[],
+  ) => {
+    const currentClose = Number(data.close);
+    const previousClose = Number(
+      lastThirtyDays[index + 1]?.close || currentClose,
+    );
+
+    const comparisonPercentage = Formatter.ruleOfThreePercent(
+      currentClose,
+      previousClose,
+    );
+
+    return (Number(comparisonPercentage) - 100).toFixed(2);
   };
 
   return {
-    getLastThirtyDays,
+    compareCloseToPrevious,
+    filterLastThirtyDays,
     currencyCodeInputProps,
-    generateKey,
-    dailyExchangeExpanded,
-    handleExpand,
   };
 };
+
+export default useExchange;
