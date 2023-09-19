@@ -1,7 +1,7 @@
 import { Divider, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import styled, { css } from "styled-components";
-import { ReactComponent as Logo } from "../../src/assets/images/svg/logo.svg";
+import { ReactComponent as Logo } from "../assets/images/svg/logo.svg";
 
 const backgroundBlueSharedStyles = css`
   font-family: Roboto, Arial, Helvetica, sans-serif;
