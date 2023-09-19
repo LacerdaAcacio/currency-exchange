@@ -5,18 +5,16 @@ import {
   HeaderDivider,
 } from "../../styles/styles";
 
-const Header = () => {
+function Header() {
   const mainTitleFormatted = LABELS.MAIN_TITLE.toUpperCase();
 
   return (
-    <>
-      <FlexContainer>
-        <FormattedLogo />
-        <HeaderDivider />
-        <h1>{mainTitleFormatted}</h1>
-      </FlexContainer>
-    </>
+    <FlexContainer>
+      <FormattedLogo />
+      <HeaderDivider />
+      <h1>{mainTitleFormatted}</h1>
+    </FlexContainer>
   );
-};
+}
 
 export default Header;
