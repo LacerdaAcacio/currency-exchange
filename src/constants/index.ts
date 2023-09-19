@@ -1,6 +1,6 @@
 import { LabelsData } from "../types/ConstantsData";
 
-export const MILLISECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
+export const MILLISECONDS_IN_A_DAY: number = 1000 * 60 * 60 * 24;
 export const API_KEY: string = "RVZG0GHEV2KORLNA";
 
 export const EXCHANGE_URL: string =
