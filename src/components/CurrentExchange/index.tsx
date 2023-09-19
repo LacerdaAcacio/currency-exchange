@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import { LABELS } from "../../constants";
 import { CurrentExchangeDivider } from "../../styles/styles";
-import { Formatter } from "../../utils/Formatter";
+import Formatter from "../../utils/Formatter";
 import { CurrentExchangeCardsParams } from "../../types/ParamsData";
 import {
   CurrentExchangeCard,
@@ -9,15 +9,13 @@ import {
   StyledNormalH3,
 } from "./styles";
 
-const CurrentExchange = ({
-  currentExchangeData,
-}: CurrentExchangeCardsParams) => {
+function CurrentExchange({ currentExchangeData }: CurrentExchangeCardsParams) {
   const formattedExchangeRate = Formatter.money(
-    currentExchangeData?.exchangeRate,
+    currentExchangeData?.exchangeRate ?? 0,
   );
 
   const formattedLastUpdatedAt = Formatter.date(
-    currentExchangeData?.lastUpdatedAt,
+    currentExchangeData?.lastUpdatedAt ?? "",
   );
 
   const fromToSymbol = `${currentExchangeData?.fromSymbol}/BRL`;
@@ -41,6 +39,6 @@ const CurrentExchange = ({
       </ExchangeContainer>
     </>
   );
-};
+}
 
 export default CurrentExchange;
