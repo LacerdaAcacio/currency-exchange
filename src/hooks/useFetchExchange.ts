@@ -1,14 +1,22 @@
-import { Formatter } from "./../utils/Formatter";
 import { useMutation } from "react-query";
 import axios from "axios";
+import { useState } from "react";
+import Formatter from "../utils/Formatter";
 import { EXCHANGE_URL } from "../constants";
 import { ExchangeParams } from "../types/ParamsData";
-import { useState } from "react";
 import { CurrentExchangeData } from "../types/CurrentExchangeData";
 import { DailyExchange } from "../types/DailyExchangeData";
 
 export const useFetchExchange = () => {
   const [hasExchangeData, setHasExchangeData] = useState(false);
+
+  const getExchange = async (
+    params: ExchangeParams,
+    isDaily: boolean = false,
+  ) => {
+    const endpoint = isDaily ? "dailyExchangeRate" : "currentExchangeRate";
+    return `${EXCHANGE_URL}${endpoint}${Formatter.objectToQueryString(params)}`;
+  };
 
   const getExchangeResponse = (response: {
     data: CurrentExchangeData | DailyExchange;
@@ -35,14 +43,6 @@ export const useFetchExchange = () => {
     },
   );
 
-  const getExchange = async (
-    params: ExchangeParams,
-    isDaily: boolean = false,
-  ) => {
-    const endpoint = isDaily ? "dailyExchangeRate" : "currentExchangeRate";
-    return `${EXCHANGE_URL}${endpoint}${Formatter.objectToQueryString(params)}`;
-  };
-
   const onSubmit = (data: ExchangeParams, isDaily: boolean = false) => {
     fetchExchangeRateMutation.mutateAsync({ data, isDaily });
   };
@@ -51,7 +51,9 @@ export const useFetchExchange = () => {
     getExchange,
     onSubmit,
     exchangeLoading: fetchExchangeRateMutation.isLoading,
-    exchangeData: fetchExchangeRateMutation.data,
+    exchangeData: fetchExchangeRateMutation.data as CurrentExchangeData,
     hasExchangeData,
   };
 };
+
+export default useFetchExchange;
