@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import Grid from "@mui/material/Grid";
+import { useForm } from "react-hook-form";
 import { API_KEY, LABELS } from "../../constants";
 import {
   ExchangeButton,
   FlexContainer,
   FormattedTextField,
 } from "../../styles/styles";
-import { useForm } from "react-hook-form";
 import { useExchange } from "../../hooks/useExchange";
 import CurrentExchange from "../CurrentExchange";
 import DailyExchange from "../DailyExchange";
@@ -13,14 +14,14 @@ import { ExchangeParams } from "../../types/ParamsData";
 import { useFetchExchange } from "../../hooks/useFetchExchange";
 import Loading from "../Loading";
 
-const Form = () => {
+function Form() {
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors },
   } = useForm();
-  const { currencyCodeInputProps, generateKey } = useExchange();
+  const { currencyCodeInputProps } = useExchange();
 
   const { onSubmit, exchangeData, exchangeLoading, hasExchangeData } =
     useFetchExchange();
@@ -74,12 +75,12 @@ const Form = () => {
               key="current_exchange"
               currentExchangeData={exchangeData}
             />
-            <DailyExchange key={generateKey} formData={getValues()} />
+            <DailyExchange key="daily_exchange" formData={getValues()} />
           </>
         )}
       </>
     </FlexContainer>
   );
-};
+}
 
 export default Form;
