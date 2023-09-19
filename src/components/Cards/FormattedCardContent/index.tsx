@@ -1,13 +1,13 @@
-import { FlexAlignedDiv, LowerHigherField, RightMarginedSpan } from "../styles";
-import { Formatter } from "../../../utils/Formatter";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { FlexAlignedDiv, LowerHigherField, RightMarginedSpan } from "../styles";
+import Formatter from "../../../utils/Formatter";
 import { FormattedCardContentParams } from "../../../types/ParamsData";
 
-const FormattedCardContent: React.FC<FormattedCardContentParams> = ({
+function FormattedCardContent({
   text,
   value,
   isComparison = false,
-}: FormattedCardContentParams) => {
+}: FormattedCardContentParams) {
   const formattedValue = Formatter.money(value, 4);
   const isHigher = Boolean(Number(value) >= 0);
 
@@ -23,6 +23,6 @@ const FormattedCardContent: React.FC<FormattedCardContentParams> = ({
       )}
     </FlexAlignedDiv>
   );
-};
+}
 
 export default FormattedCardContent;
