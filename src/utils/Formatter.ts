@@ -1,4 +1,4 @@
-export const Formatter = {
+const Formatter = {
   money: (value: number | string, decimals: number = 2) => {
     return `R$ ${Number(value).toFixed(decimals)}`;
   },
@@ -35,11 +35,10 @@ export const Formatter = {
   },
 
   objectToQueryString: (obj: Record<string, unknown>) => {
-    return (
-      "?" +
-      Object.keys(obj)
-        .map((key) => `${key}=${obj[key]}`)
-        .join("&")
-    );
+    return `?${Object.keys(obj)
+      .map((key) => `${key}=${obj[key]}`)
+      .join("&")}`;
   },
 };
+
+export default Formatter;
