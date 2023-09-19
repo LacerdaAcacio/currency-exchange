@@ -1,11 +1,11 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 
-const Loading: React.FC = () => {
+function Loading() {
   return (
-    <Backdrop open={true}>
+    <Backdrop open>
       <CircularProgress color="primary" />
     </Backdrop>
   );
-};
+}
 
 export default Loading;
