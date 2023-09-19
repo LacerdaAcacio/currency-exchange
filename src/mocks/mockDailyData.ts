@@ -1,4 +1,4 @@
-export const mockResponse = {
+const mockResponse = {
   success: true,
   from: "USD",
   to: "BRL",
@@ -706,3 +706,5 @@ export const mockResponse = {
     },
   ],
 };
+
+export default mockResponse;
