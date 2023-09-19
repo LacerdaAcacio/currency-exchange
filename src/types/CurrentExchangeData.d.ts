@@ -1,5 +1,7 @@
+import { DailyExchangeData } from "./DailyExchangeData";
+
 export interface CurrentExchangeData {
-  data: any;
+  data: DailyExchangeData[];
   exchangeRate: number;
   fromSymbol: string;
   toSymbol: string;
